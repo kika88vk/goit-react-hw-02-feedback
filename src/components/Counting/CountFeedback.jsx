@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import css from './Counting.module.css';
 import { FeedbackOptions } from './FeedbackOptions';
 import { Statistics } from './Statistics';
 import { Section } from './Section';
+import { Notification } from './Notification';
 import PropTypes from 'prop-types';
 
 class CountFeedback extends Component {
@@ -23,6 +23,12 @@ class CountFeedback extends Component {
     neutral: 0,
     bad: 0,
   };
+
+  // handleOptionClick = () => {
+  //   this.setState(prevState => {
+  //     return { [option]: prevState[option] + 1 };
+  //   });
+  // };
 
   handleGoodClick = () => {
     this.setState(prevState => {
@@ -64,10 +70,14 @@ class CountFeedback extends Component {
 
   render() {
     const { good, neutral, bad } = this.props;
+
     return (
       <div>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
+            // options={['good', 'neutral', 'bad']}
+            // onLeaveFeedback={this.handleOptionClick}
+
             onGoodClick={this.handleGoodClick}
             onNeutralClick={this.handleNeutralClick}
             onBadClick={this.handleBadClick}
@@ -77,13 +87,17 @@ class CountFeedback extends Component {
           />
         </Section>
         <Section title={'Statistics'}>
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
-          />
+          {this.countTotalFeedback() === 0 ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
         </Section>
       </div>
     );
