@@ -24,27 +24,9 @@ class CountFeedback extends Component {
     bad: 0,
   };
 
-  // handleOptionClick = () => {
-  //   this.setState(prevState => {
-  //     return { [option]: prevState[option] + 1 };
-  //   });
-  // };
-
-  handleGoodClick = () => {
+  handleOptionClick = option => {
     this.setState(prevState => {
-      return { good: prevState.good + 1 };
-    });
-  };
-
-  handleNeutralClick = () => {
-    this.setState(prevState => {
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-
-  handleBadClick = () => {
-    this.setState(prevState => {
-      return { bad: prevState.bad + 1 };
+      return { [option]: prevState[option] + 1 };
     });
   };
 
@@ -62,28 +44,18 @@ class CountFeedback extends Component {
     const percentage = (good * 100) / total;
 
     if (good > 0) {
-      console.log(percentage);
       return Math.round(percentage);
     }
     return 0;
   };
 
   render() {
-    const { good, neutral, bad } = this.props;
-
     return (
       <div>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
-            // options={['good', 'neutral', 'bad']}
-            // onLeaveFeedback={this.handleOptionClick}
-
-            onGoodClick={this.handleGoodClick}
-            onNeutralClick={this.handleNeutralClick}
-            onBadClick={this.handleBadClick}
-            good={good}
-            neutral={neutral}
-            bad={bad}
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.handleOptionClick}
           />
         </Section>
         <Section title={'Statistics'}>
