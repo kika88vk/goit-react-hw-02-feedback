@@ -1,6 +1,6 @@
 import css from './Counting.module.css';
 
-export const Controls = ({
+export const FeedbackOptions = ({
   onGoodClick,
   onNeutralClick,
   onBadClick,
