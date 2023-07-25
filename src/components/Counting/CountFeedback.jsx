@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import css from './Counting.module.css';
+// import css from './Counting.module.css';
 import { FeedbackOptions } from './FeedbackOptions';
 import { Statistics } from './Statistics';
 import { Section } from './Section';
